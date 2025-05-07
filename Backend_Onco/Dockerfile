@@ -1,15 +1,15 @@
 From eclipse-temurin:21-jdk as builder
 
 # Set the working directory
-
 WORKDIR /app
 
 # Copy the pom.xml and the source code
-
 COPY . .
 
-# Build the application
+# Grant execution permissions to mvnw
+RUN chmod +x ./mvnw
 
+# Build the application
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Run the application
