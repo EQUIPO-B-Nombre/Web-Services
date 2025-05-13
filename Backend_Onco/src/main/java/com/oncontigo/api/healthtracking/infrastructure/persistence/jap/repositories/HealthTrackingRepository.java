@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface HealthTrackingRepository extends JpaRepository<HealthTracking, Long> {
     Optional<HealthTracking> findByPatient_Id(Long patientId);
     List<HealthTracking> findByDoctor_Id(Long doctorId);
+    boolean existsByPatient_IdAndDoctor_Id(Long patientId, Long doctorId);
 }

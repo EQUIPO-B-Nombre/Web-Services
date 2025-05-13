@@ -36,8 +36,16 @@ public class AppointmentCommandServiceImpl implements AppointmentCommandService 
     public Optional<Appointment> handle(UpdateAppointmentCommand command) {
         var appointment = appointmentRepository.findById(command.id());
         if (appointment.isEmpty()) throw new AppointmentNotFoundException(command.id());
+
         var updatedAppointment = appointment.get();
-        appointmentRepository.save(updatedAppointment.update(command));
+        updatedAppointment.update(command);
+        appointmentRepository.save(updatedAppointment);
+
+        // Delegar la lógica al agregado
+        var healthTracking = updatedAppointment.getHealthTracking();
+        healthTracking.updateLastVisitIfCompleted(updatedAppointment);
+        healthTrackingRepository.save(healthTracking);
+
         return Optional.of(updatedAppointment);
     }
 
