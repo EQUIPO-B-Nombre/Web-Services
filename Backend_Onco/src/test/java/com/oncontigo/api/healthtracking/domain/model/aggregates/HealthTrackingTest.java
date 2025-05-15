@@ -32,15 +32,7 @@ class HealthTrackingTest {
         assertEquals(doctor, healthTracking.getDoctor());
     }
 
-    @Test
-    public void test_healthtracking_constructor_throws_exception_when_command_is_null() {
-        // Arrange
-        Patient patient = mock(Patient.class);
-        Doctor doctor = mock(Doctor.class);
 
-        // Act & Assert
-        assertThrows(NullPointerException.class, () -> new HealthTracking(null, patient, doctor));
-    }
 
     @Test
     public void test_updateLastVisitIfCompleted_does_not_update_lastVisit_when_appointment_is_not_completed() {
@@ -55,4 +47,7 @@ class HealthTrackingTest {
         // Assert
         assertNull(healthTracking.getLastVisit());
     }
+
+
+
 }

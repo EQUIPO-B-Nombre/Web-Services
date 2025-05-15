@@ -5,16 +5,21 @@ import com.oncontigo.api.healthtracking.domain.model.commands.UpdatePrescription
 import com.oncontigo.api.profile.domain.model.entities.Doctor;
 import com.oncontigo.api.profile.domain.model.entities.Patient;
 import com.oncontigo.api.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 public class Prescription extends AuditableAbstractAggregateRoot<Prescription> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @NotNull(message = "Medication name is required")
     @NotBlank(message = "Medication name cannot be blank")
     private String medicationName;

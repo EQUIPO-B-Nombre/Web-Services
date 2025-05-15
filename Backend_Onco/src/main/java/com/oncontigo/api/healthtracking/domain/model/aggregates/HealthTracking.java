@@ -51,7 +51,7 @@ public class HealthTracking extends AuditableAbstractAggregateRoot<HealthTrackin
     public HealthTracking(CreateHealthTrackingCommand command, Patient patient, Doctor doctor) {
         this.status = HealthTrackingStatus.ACTIVE;
         this.description = command.description();
-        this.lastVisit = null;
+        this.lastVisit = LocalDateTime.now();
         this.patient = patient;
         this.doctor = doctor;
     }

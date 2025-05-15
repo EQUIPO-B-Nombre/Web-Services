@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Setter
 public class Appointment extends AuditableAbstractAggregateRoot<Appointment> {
 
     @Id
