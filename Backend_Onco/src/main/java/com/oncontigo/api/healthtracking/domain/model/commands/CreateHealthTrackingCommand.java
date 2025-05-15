@@ -5,7 +5,5 @@ import java.time.LocalDateTime;
 public record CreateHealthTrackingCommand(
         Long patientId,
         Long doctorId,
-        String status,
-        String description,
-        LocalDateTime lastVisit
+        String description
 ) {}

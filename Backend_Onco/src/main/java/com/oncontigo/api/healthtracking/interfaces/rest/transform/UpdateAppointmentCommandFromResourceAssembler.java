@@ -11,7 +11,8 @@ public class UpdateAppointmentCommandFromResourceAssembler {
         return new UpdateAppointmentCommand(
                 id,
                 resource.description(),
-                resource.dateTime()
+                resource.dateTime(),
+                resource.status()
         );
     }
 }

@@ -10,7 +10,7 @@ public class HealthTrackingResourceFromEntityAssembler {
                 healthTracking.getId(),
                 healthTracking.getPatientId(),
                 healthTracking.getDoctorId(),
-                healthTracking.getStatus(),
+                healthTracking.getStatus().toString(),
                 healthTracking.getDescription(),
                 healthTracking.getLastVisit()
         );

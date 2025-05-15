@@ -9,9 +9,7 @@ public class CreateHealthTrackingCommandFromResourceAssembler {
         return new CreateHealthTrackingCommand(
                 resource.patientId(),
                 resource.doctorId(),
-                resource.status(),
-                resource.description(),
-                resource.lastVisit()
+                resource.description()
         );
     }
 }
