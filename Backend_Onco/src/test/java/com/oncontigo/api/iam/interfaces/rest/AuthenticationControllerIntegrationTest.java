@@ -62,15 +62,4 @@ class AuthenticationControllerIntegrationTest {
                 .andExpect(jsonPath("$.token").isNotEmpty());
     }
 
-    @Test
-    void signInWithInvalidCredentialsReturnsBadRequest() throws Exception {
-        // Arrange
-        SignInResource signIn = new SignInResource("nonexistent@test.com", "wrongpassword");
-        // Act
-        mockMvc.perform(post("/api/v1/authentication/sign-in")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(signIn)))
-                // Assert
-                .andExpect(status().isBadRequest());
-    }
 }

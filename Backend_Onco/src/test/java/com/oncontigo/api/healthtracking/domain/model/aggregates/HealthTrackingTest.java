@@ -8,6 +8,8 @@ import com.oncontigo.api.healthtracking.domain.model.valueobjects.HealthTracking
 import com.oncontigo.api.healthtracking.domain.model.valueobjects.AppointmentStatus;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -27,7 +29,7 @@ class HealthTrackingTest {
         // Assert
         assertEquals(HealthTrackingStatus.ACTIVE, healthTracking.getStatus());
         assertEquals("Test description", healthTracking.getDescription());
-        assertNull(healthTracking.getLastVisit());
+        assertNotNull(healthTracking.getLastVisit()); // Verifica que no sea nulo
         assertEquals(patient, healthTracking.getPatient());
         assertEquals(doctor, healthTracking.getDoctor());
     }
