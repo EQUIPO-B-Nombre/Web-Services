@@ -1,6 +1,7 @@
 package com.oncontigo.api.healthtracking.interfaces.rest;
 
 import com.oncontigo.api.healthtracking.domain.model.commands.CreatePrescriptionCommand;
+import com.oncontigo.api.healthtracking.domain.model.commands.DeletePrescriptionCommand;
 import com.oncontigo.api.healthtracking.domain.model.commands.UpdatePrescriptionCommand;
 import com.oncontigo.api.healthtracking.domain.model.entities.Prescription;
 import com.oncontigo.api.healthtracking.domain.model.queries.GetAllPrescriptionsByPatientIdQuery;
@@ -103,6 +104,16 @@ public class PrescriptionController {
 
         var prescriptionResource = PrescriptionResourceFromEntityAssembler.toResource(updatedPrescription.get());
         return ResponseEntity.ok(prescriptionResource);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePrescription(@PathVariable Long id) {
+        try {
+            prescriptionCommandService.handle(new DeletePrescriptionCommand(id));
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
     }
 
 

@@ -6,6 +6,7 @@ public record AppointmentResource(
         Long id,
         LocalDateTime dateTime,
         String description,
-        Long healthTrackingId
+        Long healthTrackingId,
+        String status
 ) {
 }

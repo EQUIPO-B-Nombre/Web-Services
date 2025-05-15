@@ -26,6 +26,10 @@ public class HealthTrackingCommandServiceImpl implements HealthTrackingCommandSe
     }
 
     public Long handle(CreateHealthTrackingCommand command) {
+        boolean exists = healthTrackingRepository.existsByPatient_IdAndDoctor_Id(command.patientId(), command.doctorId());
+        if (exists) {
+            throw new DuplicateHealthTrackingException(command.patientId(), command.doctorId());
+        }
         var doctor = externalProfilesService.fetchDoctorById(command.doctorId());
         var patient = externalProfilesService.fetchPatientById(command.patientId());
         if (doctor.isEmpty()) throw new DoctorNotFoundException(command.doctorId());

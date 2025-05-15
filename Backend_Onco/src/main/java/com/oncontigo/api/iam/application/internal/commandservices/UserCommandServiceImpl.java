@@ -3,7 +3,9 @@ package com.oncontigo.api.iam.application.internal.commandservices;
 import com.oncontigo.api.iam.application.internal.outboundservices.acl.ExternalProfileRoleService;
 import com.oncontigo.api.iam.application.internal.outboundservices.hashing.HashingService;
 import com.oncontigo.api.iam.application.internal.outboundservices.tokens.TokenService;
+import com.oncontigo.api.iam.domain.exceptions.InvalidPasswordException;
 import com.oncontigo.api.iam.domain.exceptions.RoleNotFoundException;
+import com.oncontigo.api.iam.domain.exceptions.UserNotFoundInSignInException;
 import com.oncontigo.api.iam.domain.model.aggregates.User;
 import com.oncontigo.api.iam.domain.model.commands.SignInCommand;
 import com.oncontigo.api.iam.domain.model.commands.SignUpCommand;
@@ -52,9 +54,9 @@ public class UserCommandServiceImpl implements UserCommandService {
     public Optional<ImmutablePair<User, String>> handle(SignInCommand command) {
         var user = userRepository.findByUsername(command.username());
         if (user.isEmpty())
-            throw new RuntimeException("User not found");
+            throw new UserNotFoundInSignInException(command.username());
         if (!hashingService.matches(command.password(), user.get().getPassword()))
-            throw new RuntimeException("Invalid password");
+            throw new InvalidPasswordException();
         var token = tokenService.generateToken(user.get().getUsername());
         return Optional.of(ImmutablePair.of(user.get(), token));
     }

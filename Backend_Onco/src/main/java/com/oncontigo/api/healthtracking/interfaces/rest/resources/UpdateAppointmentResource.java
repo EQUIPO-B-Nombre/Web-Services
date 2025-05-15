@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public record UpdateAppointmentResource(
         String description,
-        LocalDateTime dateTime
+        LocalDateTime dateTime,
+        String status
 ) {
 }

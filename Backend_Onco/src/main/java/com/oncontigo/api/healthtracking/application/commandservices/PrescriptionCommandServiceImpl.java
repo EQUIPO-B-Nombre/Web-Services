@@ -26,10 +26,12 @@ public class PrescriptionCommandServiceImpl implements PrescriptionCommandServic
     }
 
     public Long handle(CreatePrescriptionCommand command) {
-        var doctor = externalProfilesService.fetchDoctorById(command.doctorId());
         var patient = externalProfilesService.fetchPatientById(command.patientId());
-        if (doctor.isEmpty()) throw new DoctorNotFoundException(command.doctorId());
         if (patient.isEmpty()) throw new PatientNotFoundException(command.patientId());
+
+        var doctor = externalProfilesService.fetchDoctorById(command.doctorId());
+        if (doctor.isEmpty()) throw new DoctorNotFoundException(command.doctorId());
+
         Prescription prescription = new Prescription(command, patient.get(), doctor.get());
         prescriptionRepository.save(prescription);
         return prescription.getId();

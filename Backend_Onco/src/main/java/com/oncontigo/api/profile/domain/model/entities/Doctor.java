@@ -1,15 +1,18 @@
 package com.oncontigo.api.profile.domain.model.entities;
 
 import com.oncontigo.api.iam.domain.model.aggregates.User;
+import com.oncontigo.api.profile.domain.model.commands.CreateDoctorCommand;
 import com.oncontigo.api.profile.domain.model.commands.UpdateDoctorCommand;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Entity
 @Getter
+@Setter
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +35,12 @@ public class Doctor {
         this.user = user;
     }
 
+    public Doctor(CreateDoctorCommand command, User user) {
+        this.experience = BigDecimal.valueOf(0.0);
+        this.user = user;
+
+    }
+
     public Doctor update(UpdateDoctorCommand command) {
         this.experience = command.experience();
         return this;
@@ -40,4 +49,6 @@ public class Doctor {
     public Long getUserId() {
         return user.getId();
     }
+
+
 }

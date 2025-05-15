@@ -10,7 +10,8 @@ public class AppointmentResourceFromEntityAssembler {
                 appointment.getId(),
                 appointment.getDateTime(),
                 appointment.getDescription(),
-                appointment.getHealthTrackingId()
+                appointment.getHealthTrackingId(),
+                appointment.getStatus().toString()
         );
     }
 }

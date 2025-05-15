@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public record UpdateAppointmentCommand(
         Long id,
         String description,
-        LocalDateTime dateTime
+        LocalDateTime dateTime,
+        String status
 ) {
 }
