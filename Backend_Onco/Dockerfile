@@ -1,4 +1,4 @@
-From eclipse-temurin:22-jdk as builder
+From eclipse-temurin:21-jdk as builder
 
 # Set the working directory
 WORKDIR /app
